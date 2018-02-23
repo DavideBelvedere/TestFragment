@@ -6,13 +6,16 @@ package com.example.davidebelvedere.testfragment.data;
 
 public class Pizza {
     private String nome;
+    private String desc;
 
 
-    public Pizza(String nome) {
+    public Pizza(String nome, String desc) {
         this.nome = nome;
+        this.desc=desc;
     }
 
     public String getName() {
         return nome;
     }
+
 }

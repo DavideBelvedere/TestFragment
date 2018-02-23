@@ -1,6 +1,8 @@
 package com.example.davidebelvedere.testfragment.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,9 +45,20 @@ public class PizzaFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Pizza selectedItem =Utility.getDataSourceItemList().get(position);
+                Pizza selectedItem = Utility.getDataSourceItemList().get(position);
 
 
+                Bundle bundle = new Bundle();
+                bundle.putString("NomePizza", selectedItem.getName());
+                DetailFragment detailFragment = new DetailFragment();
+                detailFragment.setArguments(bundle);
+
+
+
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.pizza_frame, detailFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
             }
         });

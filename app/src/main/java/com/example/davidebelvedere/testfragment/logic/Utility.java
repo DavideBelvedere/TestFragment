@@ -15,10 +15,10 @@ import java.util.List;
 public class Utility {
     public static void initDataSource(Context context) {
         List<Pizza> pizzaList = new ArrayList<Pizza>();
-        pizzaList.add(new Pizza("Margherita"));
-        pizzaList.add(new Pizza("4 formaggi"));
-        pizzaList.add(new Pizza("Capricciosa"));
-        pizzaList.add(new Pizza("Calzone"));
+        pizzaList.add(new Pizza("Margherita","buonissima"));
+        pizzaList.add(new Pizza("4 formaggi","ottima"));
+        pizzaList.add(new Pizza("Capricciosa","eccezionale"));
+        pizzaList.add(new Pizza("Calzone","eccelsa"));
 
         MainSingleton.getInstance().setPizzaArray(pizzaList);
     }
