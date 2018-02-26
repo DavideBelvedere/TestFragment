@@ -6,4 +6,5 @@ package com.example.davidebelvedere.testfragment.logic;
 
 public interface UtilityFragment {
     public void setListener(int position);
+    public int getPos();
 }

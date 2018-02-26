@@ -2,6 +2,7 @@ package com.example.davidebelvedere.testfragment.fragment;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -28,7 +29,9 @@ public class DetailFragment extends Fragment {
     TextView nomePizza;
     TextView descPizza;
 
+
     private CustomAdapter customAdapter;
+    private UtilityFragment mCallback;
     public DetailFragment() {
 
     }
@@ -64,6 +67,18 @@ public class DetailFragment extends Fragment {
         }
 
 
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        try {
+            mCallback = (UtilityFragment) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString());
+        }
     }
 
     public void updateView(int position) {

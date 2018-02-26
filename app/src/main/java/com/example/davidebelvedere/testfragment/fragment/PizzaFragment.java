@@ -21,7 +21,7 @@ import com.example.davidebelvedere.testfragment.ui.adapter.CustomAdapter;
  */
 
 public class PizzaFragment extends Fragment {
-    UtilityFragment mCallback;
+    private UtilityFragment mCallback;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -47,6 +47,13 @@ public class PizzaFragment extends Fragment {
         });
 
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

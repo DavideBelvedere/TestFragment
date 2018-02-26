@@ -13,6 +13,7 @@ import java.util.List;
  */
 
 public class Utility {
+    public static int currentPos=0;
     public static void initDataSource(Context context) {
         List<Pizza> pizzaList = new ArrayList<Pizza>();
         pizzaList.add(new Pizza("Margherita","buonissima"));
