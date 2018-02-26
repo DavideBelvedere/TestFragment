@@ -15,13 +15,13 @@ import com.example.davidebelvedere.testfragment.ui.adapter.CustomAdapter;
 public class MainActivity extends AppCompatActivity implements UtilityFragment {
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utility.initDataSource(this);
         setContentView(R.layout.activity_main);
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (savedInstanceState == null) {
@@ -32,8 +32,18 @@ public class MainActivity extends AppCompatActivity implements UtilityFragment {
                 //fine creazione fragment
             }
         } else {
-            DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detail_fragment);
+
+            DetailFragment detailFragment = new DetailFragment();
+            fragmentTransaction.add(R.id.detail_frame_land, detailFragment);
+
+            PizzaFragment pizzaFragment = new PizzaFragment();
+            fragmentTransaction.add(R.id.pizza_frame_land, pizzaFragment);
+
+            fragmentTransaction.commit();
             detailFragment.updateView(0);
+
+
+
         }
 
     }
@@ -52,7 +62,18 @@ public class MainActivity extends AppCompatActivity implements UtilityFragment {
             transaction.addToBackStack(null);
             transaction.commit();
         } else {
-            DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.detail_fragment);
+
+            Bundle bundle = new Bundle();
+            bundle.putString("Posizione", "" + position);
+            DetailFragment detailFragment = new DetailFragment();
+            detailFragment.setArguments(bundle);
+
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.detail_frame_land, detailFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
             detailFragment.updateView(position);
         }
     }

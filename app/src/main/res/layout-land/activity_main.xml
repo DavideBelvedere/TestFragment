@@ -3,17 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:name="com.example.davidebelvedere.testfragment.fragment.PizzaFragment"
-        android:id="@+id/pizza_fragment"
-        android:layout_weight="1"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        />
-    <fragment
-        android:name="com.example.davidebelvedere.testfragment.fragment.DetailFragment"
-        android:id="@+id/detail_fragment"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        android:id="@+id/pizza_frame_land"/>
+    <FrameLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent" />
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:id="@+id/detail_frame_land"/>
 </LinearLayout>
