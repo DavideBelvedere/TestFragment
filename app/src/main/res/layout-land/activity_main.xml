@@ -8,7 +8,8 @@
         android:id="@+id/pizza_fragment"
         android:layout_weight="1"
         android:layout_width="0dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
     <fragment
         android:name="com.example.davidebelvedere.testfragment.fragment.DetailFragment"
         android:id="@+id/detail_fragment"

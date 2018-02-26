@@ -1,10 +1,7 @@
 package com.example.davidebelvedere.testfragment.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.content.res.Configuration;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,10 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.davidebelvedere.testfragment.R;
-import com.example.davidebelvedere.testfragment.data.Pizza;
 import com.example.davidebelvedere.testfragment.logic.Utility;
-import com.example.davidebelvedere.testfragment.ui.activity.CustomAdapter;
-import com.example.davidebelvedere.testfragment.ui.adapter.MainActivity;
+import com.example.davidebelvedere.testfragment.logic.UtilityFragment;
+import com.example.davidebelvedere.testfragment.ui.adapter.CustomAdapter;
 
 
 /**
@@ -25,7 +21,7 @@ import com.example.davidebelvedere.testfragment.ui.adapter.MainActivity;
  */
 
 public class PizzaFragment extends Fragment {
-
+    UtilityFragment mCallback;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -46,24 +42,19 @@ public class PizzaFragment extends Fragment {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Posizione", "" + position);
-                    DetailFragment detailFragment = new DetailFragment();
-                    detailFragment.setArguments(bundle);
+                mCallback.setListener(position);
+            }
+        });
 
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.pizza_frame, detailFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                } else{
-                    DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.pizza_fragment);
-                    detailFragment.updateView(position);
-                }
-
-                }
-            });
-
+        try {
+            mCallback = (UtilityFragment) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString());
         }
     }
+}
