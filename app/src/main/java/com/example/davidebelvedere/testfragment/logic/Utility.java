@@ -18,7 +18,7 @@ public class Utility {
         pizzaList.add(new Pizza("Margherita","buonissima"));
         pizzaList.add(new Pizza("4 formaggi","ottima"));
         pizzaList.add(new Pizza("Capricciosa","eccezionale"));
-        pizzaList.add(new Pizza("Calzone","eccelsa"));
+
 
         MainSingleton.getInstance().setPizzaArray(pizzaList);
     }
