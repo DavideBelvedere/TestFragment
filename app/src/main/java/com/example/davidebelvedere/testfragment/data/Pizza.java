@@ -18,4 +18,6 @@ public class Pizza {
         return nome;
     }
 
+    public String getDesc(){return desc;}
+
 }

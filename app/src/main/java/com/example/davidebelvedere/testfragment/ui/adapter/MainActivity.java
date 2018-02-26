@@ -2,6 +2,7 @@ package com.example.davidebelvedere.testfragment.ui.adapter;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -20,22 +21,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utility.initDataSource(this);
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-        //inizio creazione fragment
-        PizzaFragment fragment = new PizzaFragment();
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-
-        fragmentTransaction.add(R.id.pizza_frame, fragment);
-        fragmentTransaction.commit();
-        //fine creazione fragment
-
-
-
-
-// Create new fragment and transaction
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (savedInstanceState == null) {
+                //inizio creazione fragment
+                PizzaFragment fragment = new PizzaFragment();
+                fragmentTransaction.add(R.id.pizza_frame, fragment);
+                fragmentTransaction.commit();
+                //fine creazione fragment
+            }
+        } else {
+            DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.pizza_fragment);
+            detailFragment.updateView(0);
+        }
 
     }
 }

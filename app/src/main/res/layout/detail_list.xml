@@ -5,16 +5,19 @@
 
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+
+        android:id="@+id/nomePizza"
    />
     <TextView
         android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/descrizionePizza"
         />
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:text="Indietro"
+        android:id="@+id/backButton"
         />
 </LinearLayout>

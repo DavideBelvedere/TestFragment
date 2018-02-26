@@ -1,23 +1,67 @@
 package com.example.davidebelvedere.testfragment.fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.davidebelvedere.testfragment.R;
+import com.example.davidebelvedere.testfragment.data.Pizza;
+import com.example.davidebelvedere.testfragment.logic.Utility;
+
+import static com.example.davidebelvedere.testfragment.logic.Utility.getPizzaFromPosition;
 
 /**
  * Created by davidebelvedere on 22/02/18.
  */
 
 public class DetailFragment extends Fragment {
-    public DetailFragment(){
+    TextView nomePizza;
+    TextView descPizza;
+
+    public DetailFragment() {
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.detail_list, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        if(getArguments()!=null) {
+            int position = Integer.parseInt(getArguments().getString("Posizione"));
+            Pizza selectedPizza = Utility.getPizzaFromPosition(position);
+            nomePizza = (TextView) view.findViewById(R.id.nomePizza);
+            descPizza = (TextView) view.findViewById(R.id.descrizionePizza);
+            Button backButton = (Button) view.findViewById(R.id.backButton);
+            nomePizza.setText(selectedPizza.getName());
+            descPizza.setText(selectedPizza.getDesc());
+            backButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getFragmentManager().popBackStack();
+                }
+            });
+        }
+
+
+
+    }
+
+    public void updateView(int position) {
+        Pizza p = Utility.getPizzaFromPosition(position);
+        nomePizza.setText(p.getName());
+        descPizza.setText(p.getDesc());
     }
 }

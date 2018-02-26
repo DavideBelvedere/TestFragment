@@ -25,4 +25,7 @@ public class Utility {
     public static List<Pizza> getDataSourceItemList() {
         return MainSingleton.getInstance().getPizzaArray();
     }
+    public static Pizza getPizzaFromPosition(int pos){
+       return getDataSourceItemList().get(pos);
+    }
 }

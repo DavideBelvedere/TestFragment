@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -35,32 +36,34 @@ public class PizzaFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Utility.initDataSource(getActivity());
-
 
         CustomAdapter customAdapter = new CustomAdapter(getActivity(), Utility.getDataSourceItemList());
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(customAdapter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Pizza selectedItem = Utility.getDataSourceItemList().get(position);
+
+                if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Posizione", "" + position);
+                    DetailFragment detailFragment = new DetailFragment();
+                    detailFragment.setArguments(bundle);
 
 
-                Bundle bundle = new Bundle();
-                bundle.putString("NomePizza", selectedItem.getName());
-                DetailFragment detailFragment = new DetailFragment();
-                detailFragment.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.pizza_frame, detailFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                } else{
+                    DetailFragment detailFragment = (DetailFragment) getFragmentManager().findFragmentById(R.id.pizza_fragment);
+                    detailFragment.updateView(position);
+                }
 
+                }
+            });
 
-
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.pizza_frame, detailFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-
-            }
-        });
+        }
     }
-}
