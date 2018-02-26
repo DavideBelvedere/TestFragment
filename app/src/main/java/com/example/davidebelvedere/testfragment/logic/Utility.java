@@ -20,6 +20,7 @@ public class Utility {
         pizzaList.add(new Pizza("Capricciosa","eccezionale"));
         pizzaList.add(new Pizza("Calzone","eccelsa"));
 
+
         MainSingleton.getInstance().setPizzaArray(pizzaList);
     }
     public static List<Pizza> getDataSourceItemList() {
